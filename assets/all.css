@@ -1,0 +1,233 @@
+/* ===generic=== */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, dialog {
+	display: block;
+}
+body {
+	margin: 0;
+	min-height: 100%;
+}
+img {
+	max-width: 100%;
+	border: 0;
+}
+
+body, button, input, select, textarea {
+	font-size: 1em;
+	font-family: 'Arial', 'Helvetica', sans-serif;
+	color: #222;
+	z-index: 0; /* let's make us a stacking context */
+}
+.cf::before,
+.cf::after {
+	content: '';
+	display: table;
+}
+.cf::after {
+	clear: both;
+}
+
+/* ===typography=== */
+h1 {
+	font-size: 4.25em; /* 68px */
+	line-height: 1.1471em;
+	margin: 0 0 0.3824em;
+}
+h2 {
+	font-size: 2.625em; /* 42px */
+	line-height: 1.2381em;
+	margin: 0 0 0.619em;
+}
+h3 {
+	font-size: 1.625em; /* 26px */
+	line-height: 1em;
+	margin: 0 0 1em;
+}
+a, a:visited {
+	text-decoration: none;
+	color: #095eba;
+}
+a:hover {
+	border-bottom: 1px solid;
+}
+a:focus {
+	outline: thin dotted;
+}
+a:hover, a:active {
+	outline: none;
+}
+small {
+	font-size: 0.625em; /* 10px */
+	margin: 0 0 2.6em;
+}
+pre, code, kbd, samp {
+	font: 1em Menlo, Consolas, 'DejaVu Sans Mono', Monaco, 'Courier New', Courier, monospace;
+}
+ul, ol {
+	list-style-position: inside;
+	text-indent: -1em;
+	padding: 0 0 0 1.19em;
+}
+li ul, li ol {
+	margin: 0 1.625em;
+}
+sub, sup {
+	font-size: 0.625em;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+sup {
+	top: -0.5em;
+}
+sub {
+	bottom: -0.25em;
+}
+hr {
+	display: block;
+	height: 1px;
+	border: 0;
+	color: #aaa;
+	background-color: #aaa;
+	margin: 3em auto;
+}
+
+p.error {
+	color: #f00;
+}
+#content.error {
+	background: url('error.png') right 50px no-repeat;
+}
+#content.error h1 {
+	font-size: 2.625em;
+}
+#content.error h2 {
+	font-size: 1.625em;
+}
+#content.error .cf section {
+	width: 50%;
+	float: left;
+}
+#content.error section h1 {
+	font-size: 1.3em;
+}
+
+/* ===positioning & stuff=== */
+nav {
+	position: fixed;
+	width: 100%;
+	padding: 0.27em 3em 0.55em 3em;
+	font-size: 0.8em;
+	color: #666;
+	text-shadow: 1px 1px 1px #fff;
+	background: -moz-linear-gradient(top, rgba(234,234,234,1) 0%, rgba(165,165,165,1) 85%, rgba(61,61,61,0.93) 85.1%, rgba(61,61,61,0) 100%); /* FF3.6+ */
+	background: -webkit-linear-gradient(top, rgba(234,234,234,1) 0%,rgba(165,165,165,1) 85%,rgba(61,61,61,0.93) 85.1%,rgba(61,61,61,0) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, rgba(234,234,234,1) 0%,rgba(165,165,165,1) 85%,rgba(61,61,61,0.93) 85.1%,rgba(61,61,61,0) 100%); /* Opera11.10+ */
+	background: linear-gradient(top, rgba(234,234,234,1) 0%,rgba(165,165,165,1) 85%,rgba(61,61,61,0.93) 85.1%,rgba(61,61,61,0) 100%); /* W3C */
+	z-index: 1;
+}
+#dir-index a,
+#dir-index a:visited,
+nav a,
+nav a:visited {
+	color: #444;
+	padding: 0 0.2em;
+}
+#dir-index a:hover,
+nav a:hover {
+	border: none;
+	color: #095eba;
+}
+
+nav a.about {
+	float: right;
+	margin-right: 6em;
+}
+
+#content {
+	margin: 0 auto;
+	padding: 5em 0 4em 0;
+	width: 75%;
+	line-height: 1.4;
+}
+
+#dir-index {
+	border: 1px solid #ccc;
+	text-shadow: 1px 1px 1px #fff;
+	font-size: 0.8em;
+	padding: 0.8em;
+	background: -moz-linear-gradient(top, rgba(234,234,234,1) 0%, rgba(195,195,195,1) 100%); /* FF3.6+ */
+	background: -webkit-linear-gradient(top, rgba(234,234,234,1) 0%,rgba(225,225,225,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, rgba(234,234,234,1) 0%,rgba(195,195,195,1) 100%); /* Opera11.10+ */
+	background: linear-gradient(top, rgba(234,234,234,1) 0%,rgba(195,195,195,1) 100%); /* W3C */
+	margin-top: 3em;
+}
+#dir-index a {
+	display: block;
+	padding: 0.2em 0.6em 0.25em 0.6em;
+}
+#dir-index a::before,
+#dir-index a::after {
+	color: #777;
+}
+#dir-index a::before {
+	content: '→';
+	position: relative;
+	top: -1px;
+	padding-right: 0.5em;
+}
+#dir-index a::after {
+	font-variant: small-caps;
+	padding-left: 1em;
+}
+#dir-index a.file::after {
+	content: 'note';
+}
+#dir-index a.dir::after {
+	content: 'folder';
+}
+#dir-index a.index::after {
+	content: 'that thing ↑↑';
+}
+#dir-index a:hover::before,
+#dir-index a:hover::after {
+	color: #444;
+}
+#dir-index h1 {
+	color: #777;
+	text-transform: uppercase;
+	font-size: 0.8em;
+	margin: 0.3em 0 0.3em 0.6em;
+}
+
+footer {
+	font-size: 0.8em;
+	color: #666;
+	border-top: 1px solid #ccc;
+	text-align: center;
+	padding: 0.3em 0 0.35em 0;
+	background: -moz-linear-gradient(top, rgba(234,234,234,1) 0%, rgba(195,195,195,1) 100%); /* FF3.6+ */
+	background: -webkit-linear-gradient(top, rgba(234,234,234,1) 0%,rgba(225,225,225,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, rgba(234,234,234,1) 0%,rgba(195,195,195,1) 100%); /* Opera11.10+ */
+	background: linear-gradient(top, rgba(234,234,234,1) 0%,rgba(195,195,195,1) 100%); /* W3C */
+}
+footer a:hover {
+	border: 0;
+	text-decoration: underline;
+}
+footer img {
+	vertical-align: -17%;
+}
+
+nav aside {
+	display: inline;
+	font-size: 0.7em;
+	margin-left: 3em;
+	text-transform: uppercase;
+	position: relative;
+	top: -0.2em;
+}
+nav aside::before {
+	content: '»';
+	font-size: 1.4em;
+	margin-right: 0.6em;
+}
