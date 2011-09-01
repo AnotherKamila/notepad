@@ -12,7 +12,7 @@ $path = getRealPath($_GET['p']);
 if ($path) {
 	// title stuff {{{
 	$title = basename($path);
-	if ($title === '') {
+	if ($title === '') { // for folders
 		$title = substr($path, -strrpos($path, '/'));
 	}
 	if (substr($title, -MD_EXT_LEN) === MD_EXT) {

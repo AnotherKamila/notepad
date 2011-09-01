@@ -11,24 +11,24 @@ define('MD_EXT_LEN', strlen(MD_EXT));
 define('MARKDOWN_CMD', '/usr/share/multimarkdown/bin/MultiMarkdown.pl');
 
 define('NOTEPAD_ROOT', realpath(substr($_SERVER['SCRIPT_FILENAME'], 0, strrpos($_SERVER['SCRIPT_FILENAME'], '/'))));
-define('NOTEPAD_ROOT_URL', substr(NOTEPAD_ROOT, strlen($_SERVER['DOCUMENT_ROOT']), strlen(NOTEPAD_ROOT)));
+define('NOTEPAD_ROOT_URL', substr(NOTEPAD_ROOT, strlen($_SERVER['DOCUMENT_ROOT'])));
 
 /**
- * takes a path representation like in the URL, and returns a pretty
- * representation of the absolute path it points to
+ * takes a path representation like in the URL, and returns the appropriate absolute path
  *
- * as path is input, we need to make sure it does not do anything evil (like 
- * pointing outside my notepad), and get something neater than
- * './something//../something///something'
+ * as path is input, we absolutely need to make sure it does not do anything evil
+ * (like pointing outside my notepad, or a pretty `; something_horrendous')
+ *
+ * we also want to get something neater than `./something//../something///something'
  *
  * @param string $path   the path to be checked/normalized
- * @returns string|bool  the fixed path, or false if it was invalid
+ * @returns string|bool  the normalized absolute path, or false if input was invalid
  */
 function getRealPath($path) {
 	$path = 'content/' . $path;
 
-	// first append extension if needed, so that realpath() does not fail on 
-	// nonexistent files
+	// first append extension if needed, so that realpath() does not fail because of
+	//  nonexistent files
 	if (!is_dir($path)) {
 		$path .= MD_EXT;
 	}
@@ -52,7 +52,7 @@ function getRealPath($path) {
  * getRealPath()
  */
 function writeDirIndex($path) {
-	echo '<section id="dir-index">';
+	echo '<ul id="dir-index">';
 	echo '<h1>In here:</h1>';
 
 	$dir = opendir($path);
@@ -83,24 +83,21 @@ function writeDirIndex($path) {
 		} else {
 			$f .= '/';
 		}
-		// TODO this should be an <ul> probably, semantically it is a list
-		echo '<a class="' . $class . '" href="' . $here_url . '/' . $f . '">' . htmlentities($f) . '</a>';
+		echo '<li><a class="' . $class . '" href="' . $here_url . '/' . $f . '">' . htmlentities($f) . '</a></li>';
 	}
 
-	echo '</section>';
+	echo '</ul>';
 }
 
 /**
  * displays the markdown file pointed to by $path as HTML
  *
- * if $path is a directory, it displays $path/index.text, + the listing of .text 
- * files and subdirs in this directory
+ * if $path is a directory, it displays $path/index.text, and calls writeDirIndex
  *
  * @param string $path path to the file being displayed
  *
- * @expects the path must point to something real and IT MUST BE SAFE, does not do any 
+ * expects the path to point to something real and IT MUST BE SAFE, does not do any 
  * checking by itself
- *
  * we reallu don't want anyone to pass a 'something; do_evil_stuff' as $path, so *make
  * sure* to check what is being passed here
  */
@@ -120,9 +117,8 @@ function Display($path) {
 		exec($command); // we are safe here as long as $path is what we think it is, which it is in case of my pretty notepad
 	}
 	if (!file_exists($html_path)) {
-		echo '<p class="error">Could not generate HTML for ' . basename($path) . '. Sorry.</p>';
+		echo '<p class="error">Could not generate HTML for ' . basename($path) . '.</p>';
 	} else {
-		// happily include it
 		include($html_path);
 	}
 
@@ -198,7 +194,7 @@ function writeFoot() {
 	<footer>
 		<a href="http://fletcherpenney.net/multimarkdown/">mmd</mark></a>
 		|
-		<a rel="license" href="<?php echo NOTEPAD_ROOT_URL . '/about/PIRATEME'; ?>"><img alt="Public Domain -- Please Pirate" style="border:0" src="<?php echo NOTEPAD_ROOT_URL; ?>/assets/pd.png" /></a>
+		<a rel="license" href="<?php echo NOTEPAD_ROOT_URL; ?>/about/PIRATEME"><img alt="Public Domain -- Please Pirate" style="border:0" src="<?php echo NOTEPAD_ROOT_URL; ?>/assets/pd.png" /></a>
 		| 
 		by <a href="http://people.ksp.sk/~kamila/" rel="author">me</a>
 	</footer>
