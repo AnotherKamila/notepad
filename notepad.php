@@ -178,7 +178,7 @@ function writeHead($title) {
 		<meta name="author" content="Kamila Souckova" />
 		<meta name="contact" content="kamila@vesmir.sk" />
 
-		<link rel="stylesheet" media="all" href="<?php echo NOTEPAD_ROOT_URL; ?>/assets/all.css" />
+		<link rel="stylesheet" media="all" href="<?php echo NOTEPAD_ROOT_URL; ?>/assets/all.min.css" />
 
 		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 	</head>
