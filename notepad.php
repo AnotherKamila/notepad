@@ -109,6 +109,10 @@ function Display($path) {
 		$INDEX = true;
 	}
 	
+	if (!file_exists($path)) { // we want to be really sure that $path is a file, so double checking will do no harm
+		echo '<p class="error">Path does not point to a valid file. Oops, this shouldn\'t happen.</p>';
+	}
+
 	$html_path = substr($path, 0, -MD_EXT_LEN) . '.html';
 
 	// create the HTML if needed
