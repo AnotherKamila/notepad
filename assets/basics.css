@@ -1,0 +1,36 @@
+/* generic stuff not only for my pretty notepad */
+
+/* we like HTML5 support */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, dialog {
+	display: block;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	min-height: 100%;
+}
+
+img {
+	max-width: 100%; /* scale large images to fit the containing element */
+	border: 0;
+}
+
+body, button, input, select, textarea {
+	font-size: 1em;
+	font-family: 'Arial', 'Helvetica', sans-serif;
+	color: #222;
+	z-index: 0; /* let's make us a stacking context */
+}
+
+/* micro clearfix hack */
+.cf::before,
+.cf::after {
+	content: '';
+	display: table;
+}
+.cf::after {
+	clear: both;
+}
+

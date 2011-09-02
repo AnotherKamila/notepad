@@ -1,0 +1,152 @@
+/* layout and and styling for elements that need special attention in my pretty notepad */
+
+/* ===content=== */
+#content {
+	margin: 0 auto;
+	padding: 5em 0 4em 0;
+	width: 75%;
+	line-height: 1.4;
+}
+
+/* ===common for #dir-index and nav=== */
+#dir-index a,
+#dir-index a:visited,
+nav a,
+nav a:visited {
+	color: #444;
+	padding: 0 0.2em;
+}
+#dir-index a:hover,
+nav a:hover {
+	border: none;
+	color: #095eba;
+}
+
+/* ===nav bar=== */
+nav {
+	position: fixed;
+	width: 100%;
+	padding: 0.27em 3em 0.55em 3em;
+	font-size: 0.8em;
+	color: #666;
+	text-shadow: 1px 1px 1px #fff;
+	background: #ddd; /* for old browsers that I don't want to support anyway */
+	background: -moz-linear-gradient(top, rgba(234,234,234,1) 0%, rgba(165,165,165,1) 85%, rgba(61,61,61,0.93) 85.1%, rgba(61,61,61,0) 100%); /* FF3.6+ */
+	background: -webkit-linear-gradient(top, rgba(234,234,234,1) 0%,rgba(165,165,165,1) 85%,rgba(61,61,61,0.93) 85.1%,rgba(61,61,61,0) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, rgba(234,234,234,1) 0%,rgba(165,165,165,1) 85%,rgba(61,61,61,0.93) 85.1%,rgba(61,61,61,0) 100%); /* Opera11.10+ */
+	background: linear-gradient(top, rgba(234,234,234,1) 0%,rgba(165,165,165,1) 85%,rgba(61,61,61,0.93) 85.1%,rgba(61,61,61,0) 100%); /* W3C */
+	z-index: 1;
+}
+nav a.about {
+	float: right;
+	margin-right: 6em;
+}
+nav aside {
+	display: inline;
+	font-size: 0.7em;
+	margin-left: 3em;
+	text-transform: uppercase;
+	position: relative;
+	top: -0.2em;
+}
+nav aside::before {
+	content: '»';
+	font-size: 1.4em;
+	margin-right: 0.6em;
+}
+
+/* ===dir-index=== */
+#dir-index {
+	margin: 0;
+	padding: 0.9em 0.8em;
+	list-style: none;
+	margin-top: 3em;
+	border: 1px solid #ccc;
+	text-shadow: 1px 1px 1px #fff;
+	font-size: 0.8em;
+	background: #eee; /* for old browsers that I don't want to support anyway */
+	background: -moz-linear-gradient(top, rgba(234,234,234,1) 0%, rgba(195,195,195,1) 100%); /* FF3.6+ */
+	background: -webkit-linear-gradient(top, rgba(234,234,234,1) 0%,rgba(225,225,225,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, rgba(234,234,234,1) 0%,rgba(195,195,195,1) 100%); /* Opera11.10+ */
+	background: linear-gradient(top, rgba(234,234,234,1) 0%,rgba(195,195,195,1) 100%); /* W3C */
+}
+#dir-index ul li a {
+	display: block;
+	padding: 0.2em 0.6em 0.25em 0.6em;
+}
+#dir-index ul li a::before,
+#dir-index ul li a::after {
+	color: #777;
+}
+#dir-index ul li a::before {
+	content: '→';
+	position: relative;
+	top: -1px;
+	padding-right: 0.5em;
+}
+#dir-index ul li a::after {
+	font-variant: small-caps;
+	padding-left: 1em;
+}
+#dir-index ul li a.file::after {
+	content: 'note';
+}
+#dir-index ul li a.dir::after {
+	content: 'folder';
+}
+#dir-index ul li a.index::after {
+	content: 'that thing ↑↑';
+}
+#dir-index ul li a:hover::before,
+#dir-index ul li a:hover::after {
+	color: #444;
+}
+#dir-index h1 {
+	color: #777;
+	text-transform: uppercase;
+	font-size: 0.8em;
+	margin: 0.3em 0 0.4em 0.6em;
+	font-weight: normal;
+}
+
+/* ===footer=== */
+footer {
+	font-size: 0.8em;
+	color: #666;
+	border-top: 1px solid #ccc;
+	text-align: center;
+	padding: 0.3em 0 0.35em 0;
+	background: #eee; /* for old browsers that I don't want to support anyway */
+	background: -moz-linear-gradient(top, rgba(234,234,234,1) 0%, rgba(195,195,195,1) 100%); /* FF3.6+ */
+	background: -webkit-linear-gradient(top, rgba(234,234,234,1) 0%,rgba(225,225,225,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, rgba(234,234,234,1) 0%,rgba(195,195,195,1) 100%); /* Opera11.10+ */
+	background: linear-gradient(top, rgba(234,234,234,1) 0%,rgba(195,195,195,1) 100%); /* W3C */
+}
+footer a:hover {
+	border: 0;
+	text-decoration: underline; /* because there is no room for a border */
+}
+footer img {
+	vertical-align: -17%;
+}
+
+/* ===error=== */
+p.error {
+	color: #f00;
+}
+#content.error {
+	background: url('error.png') right 50px no-repeat;
+}
+#content.error h1 {
+	font-size: 2.625em;
+}
+#content.error h2 {
+	font-size: 1.625em;
+}
+#content.error .cf section {
+	width: 50%;
+	float: left;
+}
+#content.error section h1 {
+	font-size: 1.3em;
+}
