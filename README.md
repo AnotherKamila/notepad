@@ -2,6 +2,7 @@ Welcome to My Pretty Notepad
 ============================
 
 My notepad is the following 2.5 things:
+
 * a [(multi)markdown](http://fletcherpenney.net/multimarkdown/)-based notepad
   written in PHP
   - it displays markdown files from inside the content/ subdirectory, generating
