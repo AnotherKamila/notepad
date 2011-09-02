@@ -56,6 +56,10 @@ and of course the MultiMarkdow perl script.
 Q: Where is the code?  
 A: [Here](http://github.com/AnotherKamila/notepad).
 
+Q: Do you use some cool stuff here?  
+A: I am planning to make this optionally accessible offline using the HTML5
+cache manifest. Right now, I only have some CSS3 and some HTML5 elements.
+
 License
 -------
 
