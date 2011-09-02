@@ -4,3 +4,6 @@
 @import url('basics.css');
 @import url('typography.css');
 @import url('layout-specials.css');
+
+@import url('print.css');
+@import url('smallscreen.css');

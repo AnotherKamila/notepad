@@ -1,0 +1,31 @@
+/* mobile styles for my pretty notepad */
+
+@media only screen and (max-width: 600px) {
+	nav {
+		position: absolute;
+		padding-left: 1em;
+		padding-right: 1em;
+	}
+	nav a.about {
+		margin-right: 2em;
+	}
+
+	nav a {
+		font-size: 1em;
+	}
+
+	#content {
+		width: 100%;
+		padding: 2em 0.5em 3em 0.5em;
+	}
+
+	nav,
+	footer,
+	#dir-index {
+		font-size: 1em; /* so that links are easily clicked on a touchscreen */
+	}
+
+	nav aside {
+		display: none;
+	}
+}
