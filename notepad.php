@@ -192,7 +192,7 @@ function writeHead($title) {
 function writeFoot() {
 ?>
 	<footer>
-		<a href="http://fletcherpenney.net/multimarkdown/">mmd</mark></a>
+		<a href="http://fletcherpenney.net/multimarkdown/">mmd</a>
 		|
 		<a rel="license" href="<?php echo NOTEPAD_ROOT_URL; ?>/about/PIRATEME"><img alt="Public Domain -- Please Pirate" style="border:0" src="<?php echo NOTEPAD_ROOT_URL; ?>/assets/pd.png" /></a>
 		| 
