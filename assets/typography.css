@@ -3,17 +3,17 @@
 h1 {
 	font-size: 4.25em; /* 68px */
 	line-height: 1.1471em;
-	margin: 0 0 0.3824em;
+	margin: 0.3824em 0;
 }
 h2 {
 	font-size: 2.625em; /* 42px */
 	line-height: 1.2381em;
-	margin: 0 0 0.619em;
+	margin: 0.619em 0;
 }
 h3 {
 	font-size: 1.625em; /* 26px */
 	line-height: 1em;
-	margin: 0 0 1em;
+	margin: 1em 0;
 }
 
 a, a:visited {
