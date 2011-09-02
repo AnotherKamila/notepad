@@ -13,6 +13,8 @@ define('MARKDOWN_CMD', '/usr/share/multimarkdown/bin/MultiMarkdown.pl');
 define('NOTEPAD_ROOT', realpath(substr($_SERVER['SCRIPT_FILENAME'], 0, strrpos($_SERVER['SCRIPT_FILENAME'], '/'))));
 define('NOTEPAD_ROOT_URL', substr(NOTEPAD_ROOT, strlen($_SERVER['DOCUMENT_ROOT'])));
 
+define('CONTENT_DIR', 'content');
+
 /**
  * takes a path representation like in the URL, and returns the appropriate absolute path
  *
@@ -25,7 +27,7 @@ define('NOTEPAD_ROOT_URL', substr(NOTEPAD_ROOT, strlen($_SERVER['DOCUMENT_ROOT']
  * @returns string|bool  the normalized absolute path, or false if input was invalid
  */
 function getRealPath($path) {
-	$path = 'content/' . $path;
+	$path = CONTENT_DIR . '/' . $path;
 
 	// first append extension if needed, so that realpath() does not fail because of
 	//  nonexistent files
@@ -71,7 +73,7 @@ function writeDirIndex($path) {
 	closedir($dir);
 	sort($listing);
 
-	$here_url = NOTEPAD_ROOT_URL . '/' . substr($path, strlen(NOTEPAD_ROOT . '/content/'), strlen($path));
+	$here_url = NOTEPAD_ROOT_URL . '/' . substr($path, strlen(NOTEPAD_ROOT . '/' . CONTENT_DIR . '/'), strlen($path));
 	foreach ($listing as $f) {
 		if ($f === 'index' . MD_EXT) {
 			$class = 'index file';
@@ -142,7 +144,7 @@ function Display($path) {
 function writeNavBar($path) {
 	echo '<nav>';
 
-	$path = substr($path, strlen(NOTEPAD_ROOT . '/content/'));
+	$path = substr($path, strlen(NOTEPAD_ROOT . '/' . CONTENT_DIR . '/'));
 	$IS_FILE = false;
 	if (substr($path, -MD_EXT_LEN, strlen($path)) === MD_EXT) {
 		$IS_FILE = true;

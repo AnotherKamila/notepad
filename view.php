@@ -5,13 +5,13 @@
  * FIXME no, the above is not a good docstring
  */
 
-require('notepad.php'); // functions are defined here
+require('notepad.php');
 
 $path = getRealPath($_GET['p']);
 
 if ($path) {
 	// title stuff {{{
-	if ($path === NOTEPAD_ROOT . '/content') {
+	if ($path === NOTEPAD_ROOT . '/' . CONTENT_DIR) {
 		$title = '~';
 	} else {
 		$title = basename($path);
