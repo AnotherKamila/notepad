@@ -15,6 +15,11 @@ define('NOTEPAD_ROOT_URL', substr(NOTEPAD_ROOT, strlen($_SERVER['DOCUMENT_ROOT']
 
 define('CONTENT_DIR', 'content');
 
+define('LOCAL_LINKS_PREFIX', 'np::'); // markdown files can contain links in the form of
+									  // [something](np::path/to/otherfile#heading-id),
+									  // which will be substituted to point to the
+									  // correct note/folder inside notepad
+
 /**
  * takes a path representation like in the URL, and returns the appropriate absolute path
  *
@@ -119,7 +124,7 @@ function Display($path) {
 
 	// create the HTML if needed
 	if (!file_exists($html_path) || (filemtime($html_path) < filemtime($path))) {
-		$command = MARKDOWN_CMD . ' ' . $path . ' > ' . $html_path;
+		$command = 'cat ' . $path . ' | sed "s,' . LOCAL_LINKS_PREFIX . ',' . NOTEPAD_ROOT_URL . '/,g" | ' . MARKDOWN_CMD . ' > ' . $html_path;
 		exec($command); // we are safe here as long as $path is what we think it is, which it is in case of my pretty notepad
 	}
 	if (!file_exists($html_path)) {
