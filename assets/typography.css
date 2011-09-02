@@ -67,3 +67,9 @@ hr {
 	background-color: #aaa;
 	margin: 3em auto;
 }
+
+q, blockquote {
+	font-style: italic;
+	margin: 0 0 0 1.625em;
+	color: #666;
+}
