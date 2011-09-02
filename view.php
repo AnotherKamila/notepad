@@ -11,12 +11,16 @@ $path = getRealPath($_GET['p']);
 
 if ($path) {
 	// title stuff {{{
-	$title = basename($path);
-	if ($title === '') { // for folders
-		$title = substr($path, -strrpos($path, '/'));
-	}
-	if (substr($title, -MD_EXT_LEN) === MD_EXT) {
-		$title = substr($title, 0, -MD_EXT_LEN);
+	if ($path === NOTEPAD_ROOT . '/content') {
+		$title = '~';
+	} else {
+		$title = basename($path);
+		if ($title === '') { // for folders
+			$title = substr($path, -strrpos($path, '/'));
+		}
+		if (substr($title, -MD_EXT_LEN) === MD_EXT) {
+			$title = substr($title, 0, -MD_EXT_LEN);
+		}
 	}
 	// }}}
 	writeHead($title);
