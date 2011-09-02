@@ -11,20 +11,26 @@
 		-ms-filter: none !important;
 	}
 
-	a, a:visited {
+	#content {
+		font-family: 'Georgia', serif;
+	}
+
+	#content a, a:visited {
 		text-decoration: underline;
 	}
 
-	a[href]:after {
+	#content a[href]::after {
 		content: " (" attr(href) ")";
+		color: #aaa;
 	}
 
-	abbr[title]:after {
+	#content abbr[title]::after {
 		content: " (" attr(title) ")";
+		color: #aaa;
 	}
 
 	/* Do not show javascript and internal links */
-	a[href^="javascript:"]:after, a[href^="#"]:after {
+	a[href^="javascript:"]::after, a[href^="#"]::after {
 		content: ""; 
 	}
 
@@ -48,5 +54,17 @@
 
 	h2, h3 {
 		page-break-after: avoid;
+	}
+
+	nav {
+		position: absolute;
+	}
+	nav .about,
+	nav aside {
+		display: none;
+	}
+
+	footer {
+		display: none;
 	}
 }
