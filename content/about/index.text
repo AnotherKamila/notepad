@@ -10,13 +10,13 @@ What Is This?
 My notepad is the following 2.5 things:
 
 * a [(multi)markdown](http://fletcherpenney.net/multimarkdown/)-based notepad
-  written in PHP
+  written in [PHP](http://php.net/)
   - it displays markdown files from inside the content/ subdirectory, generating
     the HTML as needed
   - currently contains only a viewer, but will have an editor some day, too
-* a collection of public notes on things like algorithms and data structures,
-  English grammar, biology and just about anything else (where the notes attempt
-  to be somewhat useful to the outside world)
+* a collection of public notes on things like [algorithms and data
+  structures](np::alg/), English grammar, biology and just about anything else
+  (where the notes attempt to be somewhat useful to the outside world)
 * the 0.5 of a thing: a coding excercise whereby a 17-years-old girl is
   attempting to learn PHP
 
@@ -34,7 +34,7 @@ FAQ for humans
 --------------
 
 Q: Can I search this notepad?  
-A: Yes, there is a Google Custom Search form on the homepage.
+A: Yes, there is a Google Custom Search form on the [homepage](np::).
 
 Q: Can I view things offline?  
 A: For the time being, no. In the future it will be possible to optionally cache
@@ -51,7 +51,8 @@ FAQ for programmers
 Q: What is this thing built on?  
 A: PHP. Currently there is no client-side scripting besides
 [MathJax](http://www.mathjax.org/). I use Apache's mod\_rewrite for pretty URLs,
-and of course the MultiMarkdow perl script.
+and of course the [MultiMarkdown](http://fletcherpenney.net/multimarkdown/) perl
+script.
 
 Q: Where is the code?  
 A: [Here](http://github.com/AnotherKamila/notepad).
