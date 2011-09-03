@@ -124,8 +124,8 @@ function Display($path) {
 
 	// create the HTML if needed
 	if (!file_exists($html_path) || (filemtime($html_path) < filemtime($path))) {
-		$command = 'cat ' . $path . ' | sed "s,' . LOCAL_LINKS_PREFIX . ',' . NOTEPAD_ROOT_URL . '/,g" | ' . MARKDOWN_CMD . ' > ' . $html_path;
-		exec($command); // we are safe here as long as $path is what we think it is, which it is in case of my pretty notepad
+		$command = 'cat ' . $path . ' | sed "s,' . LOCAL_LINKS_PREFIX . ',' . NOTEPAD_ROOT_URL . '/,g" | ' . MARKDOWN_CMD . ' > ' . escapeshellarg($html_path); // the path here never contains any evilness, because it is validated sooner, but better safe than sorry :D
+		exec($command);
 	}
 	if (!file_exists($html_path)) {
 		echo '<p class="error">Could not generate HTML for ' . basename($path) . '.</p>';
