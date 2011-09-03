@@ -88,13 +88,13 @@ nav aside::before {
 	font-variant: small-caps;
 	padding-left: 1em;
 }
-#dir-index li a.file::after {
+#dir-index li .file::after {
 	content: 'note';
 }
-#dir-index li a.dir::after {
+#dir-index li .dir::after {
 	content: 'folder';
 }
-#dir-index li a.index::after {
+#dir-index li .index::after {
 	content: 'that thing ↑↑';
 }
 #dir-index li a:hover::before,
