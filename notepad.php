@@ -50,167 +50,44 @@ function getRealPath($path) {
 }
 
 /**
- * displays a pretty directory index of markdown files and subdirs in the given 
- * directory
- *
- * @param string $dir path to the directory being indexed
- *
- * expects the path to be a valid path to a directory, having passed thru 
- * getRealPath()
- */
-function writeDirIndex($path) {
-	echo '<ul id="dir-index">';
-	echo '<h1>In here:</h1>';
-
-	$dir = opendir($path);
-	if (!$dir) {
-		echo '<p class="error">Cannot open directory for listing.</p>';
-		return;
-	}
-	$listing = array();
-	while ($f = readdir($dir)) {
-		if ($f[0] !== '.') {
-			if ((filetype($path . '/' . $f) === 'dir') || (substr($f, -MD_EXT_LEN) === MD_EXT)) {
-				$listing[] = $f;
-			}
-		}
-	}
-	closedir($dir);
-	sort($listing);
-
-	$here_url = NOTEPAD_ROOT_URL . '/' . substr($path, strlen(NOTEPAD_ROOT . '/' . CONTENT_DIR . '/'), strlen($path));
-	foreach ($listing as $f) {
-		if ($f === 'index' . MD_EXT) {
-			$class = 'index file';
-		} else {
-			$class = filetype($path . '/' . $f);
-		}
-		if (filetype($path . '/' . $f) === 'file') {
-			$f = substr($f, 0, -MD_EXT_LEN);
-		} else {
-			$f .= '/';
-		}
-		echo '<li><a class="' . $class . '" href="' . $here_url . '/' . $f . '">' . htmlentities($f) . '</a></li>';
-	}
-
-	echo '</ul>';
-}
-
-/**
- * displays the markdown file pointed to by $path as HTML
- *
- * if $path is a directory, it displays $path/index.text, and calls writeDirIndex
+ * displays the markdown file pointed to by $path as HTML according to the 
+ * 'content' template, creating the HTML from .text if needed
  *
  * @param string $path path to the file being displayed
  *
- * expects the path to point to something real and IT MUST BE SAFE, does not do any 
- * checking by itself
- * we reallu don't want anyone to pass a 'something; do_evil_stuff' as $path, so *make
- * sure* to check what is being passed here
+ * expects the path to point to something real and safe, does not do any checking by
+ * itself
  */
 function Display($path) {
-	$INDEX = false; // do we need to append a directory index?
 	// first determine if we are accessing a dir or a file
 	if (is_dir($path)) {
-		$path .= '/index' . MD_EXT;
-		$INDEX = true;
+		$src_path = $path . '/index' . MD_EXT;
+	} else {
+		$src_path = $path;
 	}
 	
-	if (!file_exists($path)) { // we want to be really sure that $path is a file, so double checking will do no harm
-		echo '<p class="error">Path does not point to a valid file. Oops, this shouldn\'t happen.</p>';
-	}
-
-	$html_path = substr($path, 0, -MD_EXT_LEN) . '.html';
+	$html_path = substr($src_path, 0, -MD_EXT_LEN) . '.html';
 
 	// create the HTML if needed
-	if (!file_exists($html_path) || (filemtime($html_path) < filemtime($path))) {
-		$command = 'cat ' . $path . ' | sed "s,' . LOCAL_LINKS_PREFIX . ',' . NOTEPAD_ROOT_URL . '/,g" | ' . MARKDOWN_CMD . ' > ' . escapeshellarg($html_path); // the path here never contains any evilness, because it is validated sooner, but better safe than sorry :D
+	if (!file_exists($html_path) || (filemtime($html_path) < filemtime($src_path))) {
+		$command = 'cat ' . $src_path . ' | sed "s,' . LOCAL_LINKS_PREFIX . ',' . NOTEPAD_ROOT_URL . '/,g" | ' . MARKDOWN_CMD . ' > ' . escapeshellarg($html_path); // TODO use php instead of sed
 		exec($command);
 	}
-	if (!file_exists($html_path)) {
-		echo '<p class="error">Could not generate HTML for ' . basename($path) . '.</p>';
-	} else {
-		include($html_path);
-	}
 
-	// index directory if needed
-	if ($INDEX) {
-		writeDirIndex(dirname($path));
-	}
+	renderTemplate('content', array('html' => $html_path, 'path' => $path));
 }
 
 /**
- * renders the path with clickable components inside a <nav> element
+ * renders a part of the notepad using a template file
  *
- * @param string $path the path to be turned into nav
+ * @param string $name name of template (stored as NOTEPAD_ROOT/assets/$name.tpl.php)
+ * @param string $variables variables which the template will want to access
  *
- * @expects path to look proper, i.e. have been put through realpath()
+ * stolen from Drupal: http://api.drupal.org/api/drupal/includes--theme.inc/function/theme_render_template
  */
-function writeNavBar($path) {
-	echo '<nav>';
-
-	$path = substr($path, strlen(NOTEPAD_ROOT . '/' . CONTENT_DIR . '/'));
-	$IS_FILE = false;
-	if (substr($path, -MD_EXT_LEN, strlen($path)) === MD_EXT) {
-		$IS_FILE = true;
-		$path = substr($path, 0, -MD_EXT_LEN);
+function renderTemplate($name, $variables = NULL) {
+	if ($variables) {
+		extract($variables, EXTR_SKIP);
 	}
-	$p = NOTEPAD_ROOT_URL;
-	echo '<a href="' . $p . '">~</a>';
-	foreach (explode('/', $path) as $component) {
-		// we don't want to render any empty components
-		if ($component === '') {
-			continue;
-		}
-		echo '/';
-		$p .= '/' . $component;
-		echo '<a href="' . $p . '/' . '">' . htmlentities($component) . '</a>';
-	}
-
-	if ($IS_FILE) {
-		echo '<aside>view MarkDown source by appending &#145;.text&#146; to URL</aside>';
-	}
-
-	echo '<a class="about" href="' . NOTEPAD_ROOT_URL . '/about">?</a>';
-	echo '</nav>';
+	include('assets/' . $name . '.tpl.php');
 }
-
-/**
- * writes all up to the <body> tag, setting the 1st part of title to the argument
- *
- * @param string $title self-explanatory
- */
-function writeHead($title) {
-?><!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<title><?php echo htmlentities($title); ?> | Kamila's Pretty Notepad</title>
-		<meta name="author" content="Kamila Souckova" />
-		<meta name="contact" content="kamila@vesmir.sk" />
-
-		<link rel="stylesheet" media="all" href="<?php echo NOTEPAD_ROOT_URL; ?>/assets/all.min.css" />
-
-		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-	</head>
-	<body>
-<?php
-}
-
-/**
- * writes the footer and closes <body> and <html>
- */
-function writeFoot() {
-?>
-	<footer>
-		<a href="http://fletcherpenney.net/multimarkdown/">mmd</a>
-		|
-		<a rel="license" href="<?php echo NOTEPAD_ROOT_URL; ?>/about/PIRATEME"><img alt="Public Domain -- Please Pirate" style="border:0" src="<?php echo NOTEPAD_ROOT_URL; ?>/assets/pd.png" /></a>
-		| 
-		by <a href="http://people.ksp.sk/~kamila/" rel="author">me</a>
-	</footer>
-	</body>
-</html>
-<?php
-}
-?>
