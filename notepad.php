@@ -70,11 +70,21 @@ function Display($path) {
 
 	// create the HTML if needed
 	if (!file_exists($html_path) || (filemtime($html_path) < filemtime($src_path))) {
-		$command = 'cat ' . $src_path . ' | sed "s,' . LOCAL_LINKS_PREFIX . ',' . NOTEPAD_ROOT_URL . '/,g" | ' . MARKDOWN_CMD . ' > ' . escapeshellarg($html_path); // TODO use php instead of sed
+		$command = MARKDOWN_CMD . ' ' . escapeshellarg($src_path) . ' > ' . escapeshellarg($html_path);
 		exec($command);
 	}
 
+	ob_start('ob_content_postprocess');
 	renderTemplate('content', array('html' => $html_path, 'path' => $path));
+	ob_end_flush();
+}
+
+/**
+ * post-processes the content part (so far only handles np::something links)
+ */
+function ob_content_postprocess($buffer) {
+	$buffer = preg_replace('/\b' . LOCAL_LINKS_PREFIX . '/' , NOTEPAD_ROOT_URL , $buffer);
+	return $buffer;
 }
 
 /**
