@@ -70,35 +70,40 @@ nav aside::before {
 	background: -o-linear-gradient(top, rgba(234,234,234,1) 0%,rgba(195,195,195,1) 100%); /* Opera11.10+ */
 	background: linear-gradient(top, rgba(234,234,234,1) 0%,rgba(195,195,195,1) 100%); /* W3C */
 }
-#dir-index li a {
+#dir-index ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+#dir-index ul li a {
 	display: block;
 	padding: 0.2em 0.6em 0.25em 0.6em;
 }
-#dir-index li a::before,
-#dir-index li a::after {
+#dir-index ul li a::before,
+#dir-index ul li a::after {
 	color: #777;
 }
-#dir-index li a::before {
+#dir-index ul li a::before {
 	content: '→';
 	position: relative;
 	top: -1px;
 	padding-right: 0.5em;
 }
-#dir-index li a::after {
+#dir-index ul li a::after {
 	font-variant: small-caps;
 	padding-left: 1em;
 }
-#dir-index li .file::after {
+#dir-index ul li .file::after {
 	content: 'note';
 }
-#dir-index li .dir::after {
+#dir-index ul li .dir::after {
 	content: 'folder';
 }
-#dir-index li .index::after {
+#dir-index ul li .index::after {
 	content: 'that thing ↑↑';
 }
-#dir-index li a:hover::before,
-#dir-index li a:hover::after {
+#dir-index ul li a:hover::before,
+#dir-index ul li a:hover::after {
 	color: #444;
 }
 #dir-index h1 {
