@@ -73,9 +73,40 @@ function Display($path) {
 		$command = MARKDOWN_CMD . ' ' . escapeshellarg($src_path) . ' > ' . escapeshellarg($html_path);
 		exec($command);
 	}
+	if (!file_exists($html_path)) {
+		$html_path = NULL; // this is to be handled inside template
+	}
 
+	$vars = array('html' => $html_path, 'path' => $path);
+
+	if (is_dir($path)) { // index directory if needed {{{
+		$listing = array();
+		$dir = opendir($path);
+		if (!$dir) {
+			$listing = NULL;
+		} else {
+			while ($f = readdir($dir)) {
+				if ($f[0] !== '.') {
+					if (filetype($path . '/' . $f) === 'dir') {
+						$listing[] = array('name' => $f . '/', 'class' => 'dir');
+					}
+					else if ($f === 'index' . MD_EXT) {
+						$listing[] = array('name' => substr($f, 0, -MD_EXT_LEN), 'class' => 'file index');
+					}
+					else if (substr($f, -MD_EXT_LEN) === MD_EXT) {
+						$listing[] = array('name' => substr($f, 0, -MD_EXT_LEN), 'class' => 'file');
+					}
+				}
+			}
+			closedir($dir);
+			sort($listing);
+		}
+
+		$vars['index'] = $listing;
+	} // }}}
+		
 	ob_start('ob_content_postprocess');
-	renderTemplate('content', array('html' => $html_path, 'path' => $path));
+	renderTemplate('content', $vars);
 	ob_end_flush();
 }
 
@@ -83,7 +114,7 @@ function Display($path) {
  * post-processes the content part (so far only handles np::something links)
  */
 function ob_content_postprocess($buffer) {
-	$buffer = preg_replace('/\b' . LOCAL_LINKS_PREFIX . '/' , NOTEPAD_ROOT_URL , $buffer);
+	$buffer = preg_replace('/\b' . LOCAL_LINKS_PREFIX . '/', NOTEPAD_ROOT_URL, $buffer);
 	return $buffer;
 }
 
