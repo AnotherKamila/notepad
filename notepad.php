@@ -11,7 +11,7 @@ define('MD_EXT_LEN', strlen(MD_EXT));
 define('MARKDOWN_CMD', '/usr/share/multimarkdown/bin/MultiMarkdown.pl');
 
 define('NOTEPAD_ROOT', realpath(substr($_SERVER['SCRIPT_FILENAME'], 0, strrpos($_SERVER['SCRIPT_FILENAME'], '/'))));
-define('NOTEPAD_ROOT_URL', substr(NOTEPAD_ROOT, strlen($_SERVER['DOCUMENT_ROOT'])));
+define('NOTEPAD_ROOT_URL', dirname($_SERVER['PHP_SELF']));
 
 define('CONTENT_DIR', 'content');
 
