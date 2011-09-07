@@ -91,22 +91,28 @@ function Display($path) {
 		if (!$dir) {
 			$listing = NULL;
 		} else {
+			$finfo = finfo_open(FILEINFO_MIME_TYPE);
 			while ($f = readdir($dir)) {
 				if ($f[0] !== '.') {
 					$thisfile = array();
 
-					if (filetype($path . '/' . $f) === 'dir') {
-						$thisfile['name'] = $f . '/';
-					} else if (substr($f, -MD_EXT_LEN) === MD_EXT) {
-						$thisfile['name'] = substr($f, 0, -MD_EXT_LEN);
+					switch (finfo_file($finfo, $path . '/' . $f)) {
+						case "directory":
+							$thisfile['name'] = $f . '/';
+							$thisfile['class'] = 'dir';
+							break;
+						case "text/plain": // for markdown
+							if (substr($f, -MD_EXT_LEN) === MD_EXT) {
+								$thisfile['name'] = substr($f, 0, -MD_EXT_LEN);
+								$thisfile['class'] = 'note';
+							}
+							if ($f === 'index' . MD_EXT) {
+								$thisfile['class'] = 'note index';
+							}
+							break;
+						default:
+							echo 'DEBUG: type: ' . finfo_file($finfo, $path . '/' . $f) . ' for ' . $f . PHP_EOL;
 					}
-
-					if ($f === 'index' . MD_EXT) {
-						$thisfile['class'] = 'file index';
-					} else {
-						$thisfile['class'] = filetype($path . '/' . $f);
-					}
-
 					$thisfile['ctime'] = filectime($path . '/' . $f);
 
 					if (isset($thisfile['name']) && $thisfile['name'] !== '') {

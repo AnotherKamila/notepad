@@ -93,7 +93,7 @@ nav aside::before {
 	font-variant: small-caps;
 	padding-left: 1em;
 }
-#dir-index ul li .file::after {
+#dir-index ul li .note::after {
 	content: 'note';
 }
 #dir-index ul li .dir::after {
