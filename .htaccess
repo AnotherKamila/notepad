@@ -1,5 +1,6 @@
 AddDefaultCharset UTF-8
-AddType text/x-web-markdown text
+# we want the browser to display the text, not download it
+AddType text/plain text
 RewriteEngine on
 RewriteCond %{REQUEST_URI} !(content\/)
 RewriteRule ^(.*\.text)$ content/$1 [L]
