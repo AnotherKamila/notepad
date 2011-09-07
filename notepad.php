@@ -19,6 +19,10 @@ define('LOCAL_LINKS_PREFIX', 'np::'); // markdown files can contain links in the
 									  // [something](np::path/to/otherfile#heading-id),
 									  // which will be substituted to point to the
 									  // correct note/folder inside notepad
+define('WSD_PREFIX', 'img::'); // things marked img::{something} will be exchanged for
+        // the needed HTML, and then parsed using the websequencediagrams.com JS service
+// TODO these are 'extensions', and should be marked so, and be inside of a 
+// function not here
 
 /**
  * takes a path representation like in the URL, and returns the appropriate absolute path
@@ -113,8 +117,9 @@ function Display($path) {
 /**
  * post-processes the content part (so far only handles np::something links)
  */
-function ob_content_postprocess($buffer) {
+function ob_content_postprocess($buffer) { // TODO that extensions TODO up there
 	$buffer = preg_replace('/\b' . LOCAL_LINKS_PREFIX . '/', NOTEPAD_ROOT_URL, $buffer);
+	$buffer = preg_replace('/\b' . WSD_PREFIX . '{([^}]*)}/', '<div class="wsd" wsd_style="napkin"><pre>\\1</pre></div><script type="text/javascript" src="http://www.websequencediagrams.com/service.js"></script>', $buffer);
 	return $buffer;
 }
 

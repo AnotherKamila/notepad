@@ -1,0 +1,9 @@
+WebSequenceDiagram integration test
+===================================
+
+Look, a diagram:
+img::{
+    Alice->Bob: Authentication Request
+    Bob-->Alice: Authentication Response
+    note over Alice,Bob: It Works!
+}
