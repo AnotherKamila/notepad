@@ -1,7 +1,15 @@
 AddDefaultCharset UTF-8
+
 # we want the browser to display the text, not download it
 AddType text/plain text
+
 RewriteEngine on
+
+# needed for correct rewriting inside mod_userdir -- this is the URL
+# the physical location would be /home/<username>/public_html/notepad/
+# if not using mod_userdir, it is not needed
+RewriteBase /~<username>/notepad/
+
 RewriteCond %{REQUEST_URI} !(content\/)
 RewriteRule ^(.*\.text)$ content/$1 [L]
 RewriteCond %{REQUEST_URI} !(^.*view.php.*$)|(^.*\/assets\/.*$)|(^.*\.text$)
