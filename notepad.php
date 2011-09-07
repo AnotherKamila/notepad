@@ -24,6 +24,8 @@ define('WSD_PREFIX', 'img::'); // things marked img::{something} will be exchang
 // TODO these are 'extensions', and should be marked so, and be inside of a 
 // function not here
 
+date_default_timezone_set('Europe/Bratislava');
+
 /**
  * takes a path representation like in the URL, and returns the appropriate absolute path
  *
@@ -91,14 +93,24 @@ function Display($path) {
 		} else {
 			while ($f = readdir($dir)) {
 				if ($f[0] !== '.') {
+					$thisfile = array();
+
 					if (filetype($path . '/' . $f) === 'dir') {
-						$listing[] = array('name' => $f . '/', 'class' => 'dir');
+						$thisfile['name'] = $f . '/';
+					} else if (substr($f, -MD_EXT_LEN) === MD_EXT) {
+						$thisfile['name'] = substr($f, 0, -MD_EXT_LEN);
 					}
-					else if ($f === 'index' . MD_EXT) {
-						$listing[] = array('name' => substr($f, 0, -MD_EXT_LEN), 'class' => 'file index');
+
+					if ($f === 'index' . MD_EXT) {
+						$thisfile['class'] = 'file index';
+					} else {
+						$thisfile['class'] = filetype($path . '/' . $f);
 					}
-					else if (substr($f, -MD_EXT_LEN) === MD_EXT) {
-						$listing[] = array('name' => substr($f, 0, -MD_EXT_LEN), 'class' => 'file');
+
+					$thisfile['ctime'] = filectime($path . '/' . $f);
+
+					if (isset($thisfile['name']) && $thisfile['name'] !== '') {
+						$listing[] = $thisfile;
 					}
 				}
 			}
