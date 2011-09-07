@@ -130,7 +130,7 @@ function Display($path) {
  * post-processes the content part (so far only handles np::something links)
  */
 function ob_content_postprocess($buffer) { // TODO that extensions TODO up there
-	$buffer = preg_replace('/\b' . LOCAL_LINKS_PREFIX . '/', NOTEPAD_ROOT_URL, $buffer);
+	$buffer = preg_replace('/\b' . LOCAL_LINKS_PREFIX . '/', NOTEPAD_ROOT_URL . '/', $buffer);
 	$buffer = preg_replace('/\b' . WSD_PREFIX . '{([^}]*)}/', '<div class="wsd" wsd_style="napkin"><pre>\\1</pre></div><script type="text/javascript" src="http://www.websequencediagrams.com/service.js"></script>', $buffer);
 	$buffer = preg_replace('/\s->\s/', '&rarr;', $buffer);
 	return $buffer;
