@@ -10,13 +10,16 @@ require_once('conf.php');
 define('NOTEPAD_ROOT', realpath(substr($_SERVER['SCRIPT_FILENAME'], 0, strrpos($_SERVER['SCRIPT_FILENAME'], '/'))));
 define('NOTEPAD_ROOT_URL', dirname($_SERVER['PHP_SELF']));
 
+/* my deepest admiration and thanks goes to http://michelf.com/projects/php-markdown/ */
+include_once('phpmd/markdown.php');
+
 /**
  * takes a path representation like in the URL, and returns the appropriate absolute path
  *
  * as path is input, we absolutely need to make sure it does not do anything evil
- * (like pointing outside my notepad, or a pretty `; something_horrendous')
+ * (like pointing outside my notepad)
  *
- * we also want to get something neater than `./something//../something///something'
+ * we also prefer to get something neater than `./something//../something///something'
  *
  * @param string $path   the path to be checked/normalized
  * @returns string|bool  the normalized absolute path, or false if input was invalid
@@ -60,8 +63,7 @@ function Display($path) {
 
 	// create the HTML if needed
 	if (!file_exists($html_path) || (filemtime($html_path) < filemtime($src_path))) {
-		$command = MARKDOWN_CMD . ' ' . escapeshellarg($src_path) . ' > ' . escapeshellarg($html_path);
-		exec($command);
+		file_put_contents($html_path, Markdown(file_get_contents($src_path)));
 	}
 	if (!file_exists($html_path)) {
 		$html_path = NULL; // this is to be handled inside template

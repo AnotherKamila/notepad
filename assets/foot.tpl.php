@@ -4,7 +4,7 @@
  */
 ?>
 	<footer>
-		<a href="http://fletcherpenney.net/multimarkdown/">mmd</a>
+		<a href="http://michelf.com/projects/php-markdown/">phpmd</a>
 		|
 		<a rel="license" href="<?php echo NOTEPAD_ROOT_URL; ?>/about/PIRATEME"><img alt="Public Domain -- Please Pirate" src="<?php echo NOTEPAD_ROOT_URL; ?>/assets/pd.png" /></a>
 		| 
