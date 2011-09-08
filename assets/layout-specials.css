@@ -99,6 +99,9 @@ nav aside::before {
 #dir-index ul li .dir::after {
 	content: 'folder';
 }
+#dir-index ul li .image::after {
+	content: 'image/handout';
+}
 #dir-index ul li .index::after {
 	content: 'that thing ↑↑';
 }

@@ -6,11 +6,22 @@ AddType text/plain text
 RewriteEngine on
 
 # needed for correct rewriting inside mod_userdir -- this is the URL
-# the physical location would be /home/<username>/public_html/notepad/
+# the physical location would be /home/dragonias/public_html/notepad/
 # if not using mod_userdir, it is not needed
-RewriteBase /~<username>/notepad/
+RewriteBase /~dragonias/notepad/
 
-RewriteCond %{REQUEST_URI} !(content\/)
-RewriteRule ^(.*\.text)$ content/$1 [L]
-RewriteCond %{REQUEST_URI} !(^.*view.php.*$)|(^.*\/assets\/.*$)|(^.*\.text$)
+# files are to be just served
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_URI} (content\/)
+RewriteRule (.*) - [S=2]
+
+# for things that look like files, just redirect to content/stuff
+# TODO this means that notepad cannot have . in names, which is not what I want
+RewriteCond %{REQUEST_URI} !(^.*view.php.*$)
+RewriteCond %{REQUEST_URI} (^.*\.[a-zA-Z]+)
+RewriteRule ^(.*)$ content/$1 [L]
+
+# otherwise let view.php handle it
+RewriteCond %{REQUEST_URI} !(^.*view.php.*$)
 RewriteRule ^(.*)$ view.php?p=$1 [L]
+

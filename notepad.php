@@ -110,6 +110,12 @@ function Display($path) {
 								$thisfile['class'] = 'note index';
 							}
 							break;
+						case "image/jpeg":
+						case "image/png":
+						case "image/gif":
+							$thisfile['name'] = $f;
+							$thisfile['class'] = 'image';
+							break;
 						default:
 							echo 'DEBUG: type: ' . finfo_file($finfo, $path . '/' . $f) . ' for ' . $f . PHP_EOL;
 					}
