@@ -91,7 +91,7 @@ nav aside::before {
 }
 #dir-index ul li a::after {
 	font-variant: small-caps;
-	padding-left: 1em;
+	padding-left: 0.8em;
 }
 #dir-index ul li .note::after {
 	content: 'note';
@@ -111,7 +111,7 @@ nav aside::before {
 }
 #dir-index ul li a .filectime {
 	font-size: 0.8em;
-	margin: 0 1em 0 2em;
+	margin: 0 0.3em 0 1.4em;
 	color: #777;
 }
 #dir-index h1 {
