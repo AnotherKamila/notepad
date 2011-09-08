@@ -9,10 +9,12 @@ What Is This?
 
 My notepad is the following 2.5 things:
 
-* a [(multi)markdown](http://fletcherpenney.net/multimarkdown/)-based notepad
+* a [markdown][md]-based notepad
   written in [PHP](http://php.net/)
   - it displays markdown files from inside the content/ subdirectory, generating
-    the HTML as needed
+    the HTML as needed (and caching into files, but this might be unnecessary --
+    TODO)
+    - does so thanks to the neat [PHP Markdown implementation][phpmd]
   - currently contains only a viewer, but will have an editor some day, too
 * a collection of public notes on things like [algorithms and data
   structures](np::alg/), English grammar, biology and just about anything else
@@ -29,6 +31,7 @@ What I think is cool about my notepad
   - maybe not in older browsers
   - maybe not in mobile browsers, to be tested
 * [MathJax](http://www.mathjax.org/) is cool everywhere, including in my notepad
+* the same thing about coolness holds for [Markdown][md]
 
 FAQ for humans
 --------------
@@ -51,8 +54,7 @@ FAQ for programmers
 Q: What is this thing built on?  
 A: PHP. Currently there is no client-side scripting besides
 [MathJax](http://www.mathjax.org/). I use Apache's mod\_rewrite for pretty URLs,
-and of course the [MultiMarkdown](http://fletcherpenney.net/multimarkdown/) perl
-script.
+and of course the [PHP Markdown][phpmd] awesomeness.
 
 Q: Where is the code?  
 A: [Here](http://github.com/AnotherKamila/notepad).
@@ -69,3 +71,6 @@ to freely enjoy my awesome notepad, I release everything (that is, both the
 content and the code) into the public domain.
 
 For the legal freaks: [PIRATEME](np::about/PIRATEME)
+
+[md]: http://daringfireball.net/projects/markdown/ "markdown"
+[phpmd]: http://michelf.com/projects/php-markdown/ "php markdown"
