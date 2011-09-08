@@ -61,16 +61,10 @@ function Display($path) {
 	
 	$html_path = substr($src_path, 0, -MD_EXT_LEN) . '.html';
 
-	// create the HTML if needed
-	if (!file_exists($html_path) || (filemtime($html_path) < filemtime($src_path))) {
-		file_put_contents($html_path, Markdown(file_get_contents($src_path)));
-	}
-	if (!file_exists($html_path)) {
-		$html_path = NULL; // this is to be handled inside template
-	}
+	$html = Markdown(file_get_contents($src_path));
 
 	ob_start('ob_content_postprocess');
-	renderTemplate('content', array('html' => $html_path));
+	renderTemplate('content', array('html' => $html));
 	ob_end_flush();
 
 	if (is_dir($path)) { // index directory if needed {{{

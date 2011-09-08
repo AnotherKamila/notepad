@@ -8,7 +8,7 @@
 <?php if (!isset($html) || $html === NULL) : ?>
 	<p class="error">Could not generate HTML!</p>
 <?php else : ?>
-	<?php include($html); ?>
+	<?php echo $html; ?>
 <?php endif; ?>
 
 </section><!-- #content -->

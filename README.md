@@ -5,13 +5,11 @@ My notepad is the following 2.5 things:
 
 * a [markdown][md]-based notepad
   written in [PHP](http://php.net/)
-  - it displays markdown files from inside the content/ subdirectory, generating
-    the HTML as needed (and caching into files, but this might be unnecessary --
-    TODO)
-    - does so thanks to the neat [PHP Markdown implementation][phpmd]
-  - currently contains only a viewer, but will have an editor some day, too
-* a collection of public notes on things like algorithms and data
-  structures, English grammar, biology and just about anything else
+  - it displays markdown files from inside the content/ subdirectory using the
+    neat [PHP Markdown implementation][phpmd]
+  - currently contains only a viewer, but might have an editor some day, too
+* a collection of public notes on things like [algorithms and data
+  structures](np::alg/), English grammar, biology and just about anything else
   (where the notes attempt to be somewhat useful to the outside world)
 * the 0.5 of a thing: a coding excercise whereby a 17-years-old girl is
   attempting to learn PHP
