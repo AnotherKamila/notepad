@@ -25,8 +25,7 @@ What I think is cool about my notepad
 * [MathJax](http://www.mathjax.org/) is cool everywhere, including in my notepad
 * the same thing about coolness holds for [Markdown][md]
 
-I do not currently have hosting, but I am planning to get this thing online
-soon.
+The notepad lives its happy life at http://fks.sk/~dragonias/notepad/ .
 
 [md]: http://daringfireball.net/projects/markdown/ "Markdown"
 [phpmd]: http://michelf.com/projects/php-markdown/ "PHP Markdown"
