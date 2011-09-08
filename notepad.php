@@ -133,7 +133,6 @@ function ob_content_postprocess($buffer) {
 	$WSD_PREFIX = 'img::';
 	$buffer = preg_replace('/\b' . $WSD_PREFIX . '{([^}]*)}/', '<div class="wsd" wsd_style="napkin"><pre>\\1</pre></div><script type="text/javascript" src="http://www.websequencediagrams.com/service.js"></script>', $buffer);
 
-	$buffer = preg_replace('/\s->\s/', '&rarr;', $buffer); // we like arrows (BUT: should be done in the convert stage instead
 	return $buffer;
 }
 
