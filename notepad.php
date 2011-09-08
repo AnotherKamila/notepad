@@ -5,7 +5,7 @@
  * @author Kamila Souckova <kamila@vesmir.sk>
  */
 
-require_once('conf.php');
+require_once('npconf.php');
 
 define('NOTEPAD_ROOT', realpath(substr($_SERVER['SCRIPT_FILENAME'], 0, strrpos($_SERVER['SCRIPT_FILENAME'], '/'))));
 define('NOTEPAD_ROOT_URL', dirname($_SERVER['PHP_SELF']));
