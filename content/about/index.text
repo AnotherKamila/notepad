@@ -63,7 +63,7 @@ Q: Do you use some cool stuff here?
 A: I am planning to make this optionally accessible offline using the HTML5
 cache manifest. Right now, I only have some CSS3 and some HTML5 elements.
 
-License
+License       {#license}
 -------
 
 I don't care about licenses, I care about content. As I want anyone to be able
