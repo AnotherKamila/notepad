@@ -5,26 +5,10 @@
  * @author Kamila Souckova <kamila@vesmir.sk>
  */
 
-define('MD_EXT', '.text');
-define('MD_EXT_LEN', strlen(MD_EXT));
-
-define('MARKDOWN_CMD', '/usr/share/multimarkdown/bin/MultiMarkdown.pl');
+require_once('conf.php');
 
 define('NOTEPAD_ROOT', realpath(substr($_SERVER['SCRIPT_FILENAME'], 0, strrpos($_SERVER['SCRIPT_FILENAME'], '/'))));
 define('NOTEPAD_ROOT_URL', dirname($_SERVER['PHP_SELF']));
-
-define('CONTENT_DIR', 'content');
-
-define('LOCAL_LINKS_PREFIX', 'np::'); // markdown files can contain links in the form of
-									  // [something](np::path/to/otherfile#heading-id),
-									  // which will be substituted to point to the
-									  // correct note/folder inside notepad
-define('WSD_PREFIX', 'img::'); // things marked img::{something} will be exchanged for
-        // the needed HTML, and then parsed using the websequencediagrams.com JS service
-// TODO these are 'extensions', and should be marked so, and be inside of a 
-// function not here
-
-date_default_timezone_set('Europe/Bratislava');
 
 /**
  * takes a path representation like in the URL, and returns the appropriate absolute path
@@ -83,11 +67,14 @@ function Display($path) {
 		$html_path = NULL; // this is to be handled inside template
 	}
 
-	$vars = array('html' => $html_path, 'path' => $path);
+	ob_start('ob_content_postprocess');
+	renderTemplate('content', array('html' => $html_path));
+	ob_end_flush();
 
 	if (is_dir($path)) { // index directory if needed {{{
 		$listing = array();
 		$dir = opendir($path);
+
 		if (!$dir) {
 			$listing = NULL;
 		} else {
@@ -96,6 +83,7 @@ function Display($path) {
 				if ($f[0] !== '.') {
 					$thisfile = array();
 
+					// handle file based on mime-type {{{
 					switch (finfo_file($finfo, $path . '/' . $f)) {
 						case "directory":
 							$thisfile['name'] = $f . '/';
@@ -118,8 +106,8 @@ function Display($path) {
 							break;
 						default:
 							echo 'DEBUG: type: ' . finfo_file($finfo, $path . '/' . $f) . ' for ' . $f . PHP_EOL;
-					}
-					$thisfile['ctime'] = filectime($path . '/' . $f);
+					} // }}}
+					$thisfile['mtime'] = filemtime($path . '/' . $f);
 
 					if (isset($thisfile['name']) && $thisfile['name'] !== '') {
 						$listing[] = $thisfile;
@@ -130,21 +118,26 @@ function Display($path) {
 			sort($listing);
 		}
 
-		$vars['index'] = $listing;
+		renderTemplate('dir-index', array('index' => $listing, 'path' => $path));
 	} // }}}
-		
-	ob_start('ob_content_postprocess');
-	renderTemplate('content', $vars);
-	ob_end_flush();
 }
 
 /**
- * post-processes the content part (so far only handles np::something links)
+ * post-processes the content part
  */
-function ob_content_postprocess($buffer) { // TODO that extensions TODO up there
-	$buffer = preg_replace('/\b' . LOCAL_LINKS_PREFIX . '/', NOTEPAD_ROOT_URL . '/', $buffer);
-	$buffer = preg_replace('/\b' . WSD_PREFIX . '{([^}]*)}/', '<div class="wsd" wsd_style="napkin"><pre>\\1</pre></div><script type="text/javascript" src="http://www.websequencediagrams.com/service.js"></script>', $buffer);
-	$buffer = preg_replace('/\s->\s/', '&rarr;', $buffer);
+function ob_content_postprocess($buffer) {
+	// markdown files can contain links in the form of
+	// [something](np::path/to/otherfile#heading-id), which will be substituted
+	// to point to the correct note/folder inside notepad
+	$LOCAL_LINKS_PREFIX = 'np::';
+	$buffer = preg_replace('/\b' . $LOCAL_LINKS_PREFIX . '/', NOTEPAD_ROOT_URL . '/', $buffer);
+
+	// things marked img::{something} will be exchanged for the needed HTML, and
+	// then parsed using the websequencediagrams.com JS service
+	$WSD_PREFIX = 'img::';
+	$buffer = preg_replace('/\b' . $WSD_PREFIX . '{([^}]*)}/', '<div class="wsd" wsd_style="napkin"><pre>\\1</pre></div><script type="text/javascript" src="http://www.websequencediagrams.com/service.js"></script>', $buffer);
+
+	$buffer = preg_replace('/\s->\s/', '&rarr;', $buffer); // we like arrows (BUT: should be done in the convert stage instead
 	return $buffer;
 }
 

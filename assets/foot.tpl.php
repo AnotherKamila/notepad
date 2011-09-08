@@ -8,7 +8,7 @@
 		|
 		<a rel="license" href="<?php echo NOTEPAD_ROOT_URL; ?>/about/PIRATEME"><img alt="Public Domain -- Please Pirate" src="<?php echo NOTEPAD_ROOT_URL; ?>/assets/pd.png" /></a>
 		| 
-		by <a href="http://people.ksp.sk/~kamila/" rel="author">me</a>
+		by <a href="http://fks.sk/~dragonias/" rel="author">me</a>
 	</footer>
 	</body>
 </html>
