@@ -64,7 +64,7 @@ function Display($path) {
 	$html = Markdown(file_get_contents($src_path));
 
 	ob_start('ob_content_postprocess');
-	renderTemplate('content', array('html' => $html));
+	renderTemplate('content', array('html' => $html, 'path' => $path));
 	ob_end_flush();
 
 	if (is_dir($path)) { // index directory if needed {{{
