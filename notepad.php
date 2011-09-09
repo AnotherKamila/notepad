@@ -111,7 +111,14 @@ function Display($path) {
 				}
 			}
 			closedir($dir);
-			sort($listing);
+
+			// sort by date then alphabetically
+			foreach($listing as $key => $row) {
+				$mtime[$key] = $row['mtime'];
+				$name[$key] = $row['name'];
+			}
+			array_multisort($mtime, SORT_DESC, $name, SORT_ASC, $listing);
+			// }}}
 		}
 
 		renderTemplate('dir-index', array('index' => $listing, 'path' => $path));

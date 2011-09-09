@@ -19,7 +19,7 @@
 <li>
 	<a class="<?php echo $f['class']; ?>" href="<?php echo $here_url . '/' . $f['name']; ?>">
 		<span class="fname"><?php echo htmlentities($f['name']); ?></span>
-		<span class="fmtime"><?php echo date('l, F j<\s\up>S</\s\up> Y', $f['mtime']); ?></span>
+		<span class="fmtime"><?php echo date('l, M j<\s\up>S</\s\up> Y g:ia', $f['mtime']); ?></span>
 	</a>
 </li>
 <?php endforeach; ?>
