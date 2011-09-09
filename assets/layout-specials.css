@@ -63,10 +63,10 @@ nav aside::before {
 	text-shadow: 1px 1px 1px #fff;
 	font-size: 0.8em;
 	background: #eee; /* for old browsers that I don't want to support anyway */
-	background: -moz-linear-gradient(top, rgba(234,234,234,1) 0%, rgba(195,195,195,1) 100%); /* FF3.6+ */
-	background: -webkit-linear-gradient(top, rgba(234,234,234,1) 0%,rgba(225,225,225,1) 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top, rgba(234,234,234,1) 0%,rgba(195,195,195,1) 100%); /* Opera11.10+ */
-	background: linear-gradient(top, rgba(234,234,234,1) 0%,rgba(195,195,195,1) 100%); /* W3C */
+	background: -moz-linear-gradient(top, rgba(234,234,234,1) 0%, rgba(218,218,218,1) 100%); /* FF3.6+ */
+	background: -webkit-linear-gradient(top, rgba(234,234,234,1) 0%,rgba(218,218,218,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, rgba(234,234,234,1) 0%,rgba(218,218,218,1) 100%); /* Opera11.10+ */
+	background: linear-gradient(top, rgba(234,234,234,1) 0%,rgba(218,218,218,1) 100%); /* W3C */
 }
 #dir-index ul {
 	list-style: none;
@@ -128,10 +128,10 @@ footer {
 	text-align: center;
 	padding: 0.3em 0 0.35em 0;
 	background: #eee; /* for old browsers that I don't want to support anyway */
-	background: -moz-linear-gradient(top, rgba(234,234,234,1) 0%, rgba(195,195,195,1) 100%); /* FF3.6+ */
-	background: -webkit-linear-gradient(top, rgba(234,234,234,1) 0%,rgba(225,225,225,1) 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top, rgba(234,234,234,1) 0%,rgba(195,195,195,1) 100%); /* Opera11.10+ */
-	background: linear-gradient(top, rgba(234,234,234,1) 0%,rgba(195,195,195,1) 100%); /* W3C */
+	background: -moz-linear-gradient(top, rgba(234,234,234,1) 0%, rgba(210,210,210,1) 100%); /* FF3.6+ */
+	background: -webkit-linear-gradient(top, rgba(234,234,234,1) 0%,rgba(210,210,210,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, rgba(234,234,234,1) 0%,rgba(210,210,210,1) 100%); /* Opera11.10+ */
+	background: linear-gradient(top, rgba(234,234,234,1) 0%,rgba(210,210,210,1) 100%); /* W3C */
 }
 footer a:hover {
 	border: 0;
