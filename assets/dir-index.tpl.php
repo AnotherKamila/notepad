@@ -14,8 +14,14 @@
 		<h1>In here:</h1>
 
 <?php $here_url = NOTEPAD_ROOT_URL . '/' . substr($path, strlen(NOTEPAD_ROOT . '/' . CONTENT_DIR . '/'), strlen($path)); ?>
+
 <?php foreach ($index as $f) : ?>
-<li><a class="<?php echo $f['class']; ?>" href="<?php echo $here_url . '/' . $f['name']; ?>"><?php echo htmlentities($f['name']); ?><span class="filemtime"><?php echo date('l, F j<\s\up>S</\s\up> Y', $f['mtime']); ?></span></a></li>
+<li>
+	<a class="<?php echo $f['class']; ?>" href="<?php echo $here_url . '/' . $f['name']; ?>">
+		<span class="fname"><?php echo htmlentities($f['name']); ?></span>
+		<span class="fmtime"><?php echo date('l, F j<\s\up>S</\s\up> Y', $f['mtime']); ?></span>
+	</a>
+</li>
 <?php endforeach; ?>
 
 	</ul>

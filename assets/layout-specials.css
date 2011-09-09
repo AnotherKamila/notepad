@@ -77,39 +77,39 @@ nav aside::before {
 	display: block;
 	padding: 0.3em 0.6em 0.35em 0.6em;
 }
-#dir-index ul li a::before,
-#dir-index ul li a::after {
-	color: #777;
-}
 #dir-index ul li a::before {
 	content: '→';
 	position: relative;
 	top: -1px;
 	padding-right: 0.5em;
 }
-#dir-index ul li a::after {
-	font-variant: small-caps;
-	padding-left: 0.8em;
+#dir-index ul li a ::before,
+#dir-index ul li a .fname::after {
+	color: #777;
 }
-#dir-index ul li .note::after {
+#dir-index ul li a .fname::after {
+	font-variant: small-caps;
+	padding-left: 1.2em;
+}
+#dir-index ul li .note .fname::after {
 	content: 'note';
 }
-#dir-index ul li .dir::after {
+#dir-index ul li .dir .fname::after {
 	content: 'folder';
 }
-#dir-index ul li .image::after {
+#dir-index ul li .image .fname::after {
 	content: 'image/handout';
 }
-#dir-index ul li .index::after {
+#dir-index ul li .index .fname::after {
 	content: 'that thing ↑↑';
 }
 #dir-index ul li a:hover::before,
-#dir-index ul li a:hover::after {
+#dir-index ul li a:hover .fname::after {
 	color: #444;
 }
-#dir-index ul li a .filemtime {
+#dir-index ul li a .fmtime {
 	font-size: 0.8em;
-	margin: 0 0.3em 0 1.4em;
+	margin-left: 1em;
 	color: #777;
 }
 #dir-index h1 {
