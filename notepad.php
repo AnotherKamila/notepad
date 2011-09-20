@@ -100,8 +100,10 @@ function Display($path) {
 							$thisfile['name'] = $f;
 							$thisfile['class'] = 'image';
 							break;
+						case "application/x-httpd-php":
+							break;
 						default:
-							echo 'DEBUG: type: ' . finfo_file($finfo, $path . '/' . $f) . ' for ' . $f . PHP_EOL;
+							$thisfile['name'] = $f;
 					} // }}}
 					$thisfile['mtime'] = filemtime($path . '/' . $f);
 
