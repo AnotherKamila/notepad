@@ -26,5 +26,5 @@ foreach (explode('/', $path) as $component) {
 
 	<?php include('search_form.tpl.php'); ?>
 
-	<a class="about" href="<?php echo NOTEPAD_ROOT_URL; ?>/about/" title="About My Pretty Notepad">?</a>
+	<!--<a class="about" href="<?php echo NOTEPAD_ROOT_URL; ?>/about/" title="About My Pretty Notepad">?</a>-->
 </nav>

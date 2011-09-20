@@ -25,7 +25,6 @@
 nav a,
 nav a:visited {
 	color: #444;
-	padding: 0 0.2em;
 }
 #dir-index a:hover,
 nav a:hover {
@@ -48,14 +47,20 @@ nav {
 	background: linear-gradient(top, rgba(234,234,234,1) 0%,rgba(165,165,165,1) 85%,rgba(61,61,61,0.93) 85.1%,rgba(61,61,61,0) 100%); /* W3C */
 	z-index: 1;
 }
+nav a {
+	padding: 0 0.2em;
+}
+/*
 nav a.about {
 	float: right;
 	margin-right: 6em;
 }
+*/
 #search-form {
 	display: inline;
 	margin: 0; padding: 0;
-	margin-left: 6em;
+	margin-right: 6em;
+	float: right;
 }
 #search-form input {
 	margin: 0; padding: 0;
@@ -67,9 +72,8 @@ nav a.about {
 #search-form #q {
 	border-top: 1px solid #aaa;
 	border-left: 1px solid #aaa;
-	font-size: 0.8em;
-	padding: 0.15em;
-	padding-left: 14px;
+	font-size: 0.9em;
+	padding: 0.15em 0.1em 0.05em 14px;
 	background: url(search_icon.png?embed=true) 2px center no-repeat #fff;
 }
 #search-form #q:focus {
