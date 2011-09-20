@@ -76,3 +76,11 @@ q, blockquote {
 	margin: 0 0 0 1.625em;
 	color: #666;
 }
+
+dd {
+	margin-bottom: 1em;
+}
+dt {
+	font-weight: bold;
+	color: #666;
+}
