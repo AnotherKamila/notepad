@@ -101,6 +101,7 @@ function Display($path) {
 							$thisfile['class'] = 'image';
 							break;
 						case "application/x-httpd-php":
+						case "text/x-php":
 							break;
 						default:
 							$thisfile['name'] = $f;
