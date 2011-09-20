@@ -1,14 +1,15 @@
 AddDefaultCharset UTF-8
 
-# we want the browser to display the text, not download it
+# we want the browser to display markdown, not download it
 AddType text/plain text
 
+# FIXME the rewrite rules suck
 RewriteEngine on
 
 # needed for correct rewriting inside mod_userdir -- this is the URL
-# the physical location would be /home/dragonias/public_html/notepad/
+# (the physical location would be /home/kamila/public_html/notepad/)
 # if not using mod_userdir, it is not needed
-RewriteBase /~dragonias/notepad/
+RewriteBase /~kamila/notepad/
 
 # files are to be just served
 RewriteCond %{REQUEST_FILENAME} -f [OR]
@@ -17,11 +18,11 @@ RewriteRule (.*) - [S=2]
 
 # for things that look like files, just redirect to content/stuff
 # TODO this means that notepad cannot have . in names, which is not what I want
-RewriteCond %{REQUEST_URI} !(^.*view.php.*$)
+RewriteCond %{REQUEST_URI} !(^.*view\.php.*$)|(^.*search\.php.*$)
 RewriteCond %{REQUEST_URI} (^.*\.[a-zA-Z]+)
 RewriteRule ^(.*)$ content/$1 [L]
 
 # otherwise let view.php handle it
-RewriteCond %{REQUEST_URI} !(^.*view.php.*$)
+RewriteCond %{REQUEST_URI} !(^.*view\.php.*$)|(^.*search\.php.*$)
 RewriteRule ^(.*)$ view.php?p=$1 [L]
 
