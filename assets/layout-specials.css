@@ -80,6 +80,9 @@ nav a.about {
 	outline: none;
 	border-color: #095eba;
 }
+#search-form #qsubmit {
+	display: none;
+}
 
 /* ===dir-index=== */
 #dir-index {
