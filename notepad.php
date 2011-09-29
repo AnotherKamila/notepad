@@ -79,20 +79,19 @@ function Display($path) {
 				if ($f[0] !== '.') {
 					$thisfile = array();
 
-					// handle file based on mime-type {{{
-					switch (finfo_file($finfo, $path . '/' . $f)) {
+					if (substr($f, -MD_EXT_LEN) === MD_EXT) { // handle markdown files {{{
+						$thisfile['name'] = substr($f, 0, -MD_EXT_LEN);
+						$thisfile['class'] = 'note';
+						if ($f === 'index' . MD_EXT) {
+							$thisfile['class'] = 'note index';
+						}
+					}
+					// }}}
+					else { // handle other files based on mime-type {{{
+						switch (finfo_file($finfo, $path . '/' . $f)) {
 						case "directory":
 							$thisfile['name'] = $f . '/';
 							$thisfile['class'] = 'dir';
-							break;
-						case "text/plain": // for markdown
-							if (substr($f, -MD_EXT_LEN) === MD_EXT) {
-								$thisfile['name'] = substr($f, 0, -MD_EXT_LEN);
-								$thisfile['class'] = 'note';
-							}
-							if ($f === 'index' . MD_EXT) {
-								$thisfile['class'] = 'note index';
-							}
 							break;
 						case "image/jpeg":
 						case "image/png":
@@ -105,6 +104,7 @@ function Display($path) {
 							break;
 						default:
 							$thisfile['name'] = $f;
+						}
 					} // }}}
 					$thisfile['mtime'] = filemtime($path . '/' . $f);
 
